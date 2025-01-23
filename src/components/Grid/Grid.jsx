@@ -144,7 +144,7 @@ const Grid = forwardRef(({ playerCount = 2 }, ref) => {
       const { select1, select2 } = round[playerIndex] || {};
       const num1 = select1 !== '-' ? parseInt(select1, 10) || 0 : 0;
       const num2 = select2 !== '-' ? parseInt(select2, 10) || 0 : 0;
-      if (num1 === num2 && select1 !== '-') {
+      if (num1 === num2 && select1 !== '-' && select2 !== '-') {
         return total + 10 + 2 * num1;
       }
 

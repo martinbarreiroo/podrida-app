@@ -1,16 +1,16 @@
 $dark-gray: #333;
 $white: #fff;
 
-body {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  background: $dark-gray;
-  color: $white;
+@font-face {
+  font-family: 'Jaro';
+  src: url('/fonts/Jaro-Regular-VariableFont_opsz.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-:root {
-  --player-count: 2; /* Dynamic player count */
-  --main-padding: 1rem;
-  --font-size-small: 0.8rem;
-  --font-size-large: 1.2rem;
+body {
+  margin: 0;
+  font-family: 'Jaro', ui-rounded;
+  background: $dark-gray;
+  color: $white;
 }
