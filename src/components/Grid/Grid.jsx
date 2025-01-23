@@ -59,7 +59,15 @@ const Grid = forwardRef(({ playerCount = 2 }, ref) => {
     });
   };
 
-  const handleNameBlur = () => {
+  const handleNameBlur = (index) => {
+    setPlayerNames((prev) => {
+      const updated = [...prev];
+      // If the name is empty, set it to a default value
+      if (!updated[index].trim()) {
+        updated[index] = `Player ${index + 1}`;
+      }
+      return updated;
+    });
     setEditingPlayer(null);
   };
 
@@ -70,7 +78,8 @@ const Grid = forwardRef(({ playerCount = 2 }, ref) => {
           type="text"
           value={playerNames[index]}
           onChange={(e) => handleNameChange(index, e.target.value)}
-          onBlur={handleNameBlur}
+          onBlur={() => handleNameBlur(index)} // Pass the index here
+          onFocus={(e) => e.target.select()}
           className={styles.playerNameInput}
           autoFocus
         />
