@@ -4,6 +4,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   overflow-x: auto;
+  overflow-y: hidden;
   padding: 1rem;
 }
 
@@ -83,20 +84,6 @@
   background-size: 8px auto;
 }
 
-.resetButton {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #444;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  border-radius: 5px;
-
-  &:hover {
-    background-color: #555;
-  }
-}
 
 .playerName {
   cursor: pointer;
