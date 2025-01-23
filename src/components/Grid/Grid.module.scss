@@ -3,19 +3,20 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: hidden; /* Disable vertical scrolling for the grid */
   padding: 1rem;
 }
 
 .gridContainer {
   display: flex;
   flex-direction: column;
-  width: fit-content;
+  width: fit-content; /* Allow content width to determine size */
   min-width: min-content;
   background-color: #333;
   border: 2px solid #333;
 }
+
 
 .headerRow,
 .row,

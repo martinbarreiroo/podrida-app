@@ -1,7 +1,7 @@
 .container {
   width: 100vw;
-  height: 100vh;
-  overflow-x: hidden;
+  min-height: 100vh; /* Allow the container to expand with content */
+  overflow-x: hidden; /* Prevent horizontal scrolling on the page */
   background-color: #333;
 }
 
@@ -12,7 +12,8 @@
   padding: 1rem;
   background-color: #333;
   color: #fff;
-  height: 100vh;
+  min-height: 100vh; /* Ensure the page takes full viewport height */
+  overflow-y: auto; /* Allow vertical scrolling on the page */
 
   @media (min-width: 768px) {
     padding: 2rem;
