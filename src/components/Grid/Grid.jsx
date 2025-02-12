@@ -47,6 +47,21 @@ const Grid = forwardRef(({ playerCount = 2 }, ref) => {
     },
   }));
 
+  const isRoundCompleted = (roundIndex) => {
+    return scores[roundIndex].every(
+      (score) => score.select1 !== '-' && score.select2 !== '-'
+    );
+  };
+
+  const getCurrentDealer = () => {
+    for (let i = 0; i < ROUNDS.length; i++) {
+      if (!isRoundCompleted(i)) {
+        return i % playerCount;
+      }
+    }
+    return null;
+  };
+
   const handleNameClick = (index) => {
     setEditingPlayer(index);
   };
@@ -72,6 +87,13 @@ const Grid = forwardRef(({ playerCount = 2 }, ref) => {
   };
 
   const renderPlayerName = (index) => {
+    const currentDealer = getCurrentDealer();
+    const isDealer = currentDealer === index;
+
+    const playerNameStyle = {
+      color: isDealer ? 'red' : 'white',
+    };
+
     if (editingPlayer === index) {
       return (
         <input
@@ -82,6 +104,7 @@ const Grid = forwardRef(({ playerCount = 2 }, ref) => {
           onFocus={(e) => e.target.select()}
           className={styles.playerNameInput}
           autoFocus
+          style={playerNameStyle}
         />
       );
     }
@@ -89,6 +112,7 @@ const Grid = forwardRef(({ playerCount = 2 }, ref) => {
       <span
         onClick={() => handleNameClick(index)}
         className={styles.playerName}
+        style={playerNameStyle}
       >
         {playerNames[index]}
       </span>

@@ -14,6 +14,7 @@ function Header({ playerCount, onIncrement, onDecrement, onReset }) {
           width={75}
           height={75}
           unoptimized={true}
+          priority
         />
         <h1>Podrida</h1>
         <Image
@@ -22,6 +23,7 @@ function Header({ playerCount, onIncrement, onDecrement, onReset }) {
           width={75}
           height={75}
           unoptimized={true}
+          priority
         />
       </div>
       <div className={styles.controls}>
