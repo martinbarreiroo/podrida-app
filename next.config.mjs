@@ -6,7 +6,11 @@ const nextConfig = nextPWA({
   register: true,
   skipWaiting: true,
   disable: process.env.NODE_ENV === 'development',
-  buildExcludes: [/_buildManifest.js$/, /_ssgManifest.js$/, /app-build-manifest.json$/],
+  buildExcludes: [
+    /_buildManifest.js$/,
+    /_ssgManifest.js$/,
+    /app-build-manifest.json$/,
+  ],
   fallbacks: {
     document: '/offline',
   },
@@ -20,39 +24,39 @@ const nextConfig = nextPWA({
         cacheName: 'google-fonts',
         expiration: {
           maxEntries: 4,
-          maxAgeSeconds: 365 * 24 * 60 * 60
-        }
-      }
+          maxAgeSeconds: 365 * 24 * 60 * 60,
+        },
+      },
     },
     {
       urlPattern: /\.(?:eot|otf|ttc|ttf|woff|woff2|font.css)$/i,
       handler: 'StaleWhileRevalidate',
       options: {
-        cacheName: 'static-font-assets'
-      }
+        cacheName: 'static-font-assets',
+      },
     },
     {
       urlPattern: /\.(?:jpg|jpeg|gif|png|svg|ico|webp)$/i,
       handler: 'StaleWhileRevalidate',
       options: {
-        cacheName: 'static-image-assets'
-      }
+        cacheName: 'static-image-assets',
+      },
     },
     {
       urlPattern: /\.(?:js|css)$/i,
       handler: 'StaleWhileRevalidate',
       options: {
-        cacheName: 'static-js-css-assets'
-      }
+        cacheName: 'static-js-css-assets',
+      },
     },
     {
       urlPattern: /\.(?:json)$/i,
       handler: 'NetworkFirst',
       options: {
-        cacheName: 'static-json-assets'
-      }
-    }
-  ]
+        cacheName: 'static-json-assets',
+      },
+    },
+  ],
 })({
   images: {
     remotePatterns: [
