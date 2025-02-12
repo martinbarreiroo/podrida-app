@@ -1,5 +1,19 @@
 # podrida-app
 
-Web-App for the card game "Podrida"
+To set up git hooks, run the following command:
+
+```bash
+#!/bin/bash
+
+echo "Configuring permissions for Git hooks..."
+
+# Set executable permissions for pre-commit hook
+chmod +x .scripts/pre-commit
+# Add other hooks here ...
+
+echo "Git hooks permissions configured successfully."
+```
+
+This is the Web-App for the card game "Podrida"
 
 https://podrida-h2048zs3n-martinbarreiroos-projects.vercel.app/
