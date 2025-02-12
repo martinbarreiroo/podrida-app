@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import Head from 'next/head'; // Import Head for including manifest
 import { ToastContainer } from 'react-toastify';
 import Header from '../components/Header/Header';
 import Grid from '../components/Grid/Grid';
@@ -25,26 +26,32 @@ export default function HomePage() {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.page}>
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          closeOnClick
-          pauseOnHover
-          draggable
-        />
+    <>
+      <Head>
+        <link rel="manifest" href="/manifest.json" />
+      </Head>
 
-        <Header
-          playerCount={playerCount}
-          onIncrement={incrementPlayers}
-          onDecrement={decrementPlayers}
-          onReset={resetScores}
-        />
+      <div className={styles.container}>
+        <div className={styles.page}>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            closeOnClick
+            pauseOnHover
+            draggable
+          />
 
-        <Grid ref={gridRef} playerCount={playerCount} />
+          <Header
+            playerCount={playerCount}
+            onIncrement={incrementPlayers}
+            onDecrement={decrementPlayers}
+            onReset={resetScores}
+          />
+
+          <Grid ref={gridRef} playerCount={playerCount} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
