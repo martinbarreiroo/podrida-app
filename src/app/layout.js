@@ -1,5 +1,11 @@
 import './globals.scss';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration/ServiceWorkerRegistration';
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1.0,
+  themeColor: '#ffffff',
+};
 
 export const metadata = {
   title: 'La Podrida App',
@@ -7,17 +13,21 @@ export const metadata = {
   icons: {
     icon: '/favicon.png',
   },
+  manifest: '/manifest.json',
+  appleWebAppCapable: 'yes',
+  appleWebAppStatusBarStyle: 'default',
 };
 
 export default function RootLayout({ children }) {
+
   return (
     <html lang="en">
       <head>
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body>
+        <ServiceWorkerRegistration />
         {children}
-        <SpeedInsights />
       </body>
     </html>
   );
