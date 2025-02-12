@@ -12,7 +12,7 @@ export default function HomePage() {
   const gridRef = useRef();
 
   const incrementPlayers = () => {
-    setPlayerCount((prev) => Math.min(prev + 1, 10));
+    setPlayerCount((prev) => Math.min(prev + 1, 7));
   };
 
   const decrementPlayers = () => {
