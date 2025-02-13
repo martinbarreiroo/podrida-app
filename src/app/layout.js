@@ -4,7 +4,7 @@ import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration/Se
 export const viewport = {
   width: 'device-width',
   initialScale: 1.0,
-  themeColor: '#444',
+  themeColor: '#333',
 };
 
 export const metadata = {
