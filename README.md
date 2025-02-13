@@ -1,5 +1,11 @@
 # podrida-app
 
+To install dependencies, run the following command:
+
+```bash
+npm install
+```
+
 To set up git hooks, run the following command:
 
 ```bash

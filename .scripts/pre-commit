@@ -9,7 +9,7 @@ echo "*********************************************************"
 cd "$(dirname "$0")/.."
 
 # Run Prettier
-npx prettier --write .
+npm run format
 status=$?
 
 if [ "$status" -ne 0 ]; then
