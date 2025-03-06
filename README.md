@@ -24,4 +24,5 @@ echo "Git hooks permissions configured successfully."
 
 This is the Web-App for the card game "Podrida"
 
-https://podrida-h2048zs3n-martinbarreiroos-projects.vercel.app/
+[https://podrida-h2048zs3n-martinbarreiroos-projects.vercel.app/
+](https://podrida-app-theta.vercel.app/)
