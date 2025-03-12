@@ -13,6 +13,7 @@ const generateRounds = (midSevensCount = 1) => {
 
   // End with descending rounds 7-1
   const descending = Array.from({ length: 7 }, (_, i) => 7 - i);
+  descending.push(1);
 
   // The pattern is [1,2,3,4,5,6,7] + [7,7,7...] + [7,6,5,4,3,2,1]
   // But we need to avoid duplicating the 7 at the boundaries
