@@ -26,3 +26,16 @@
     padding: 3rem;
   }
 }
+
+// Add to page.module.scss
+.headerWithSettings {
+  position: relative;
+  width: 100%;
+}
+
+.settingsWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}

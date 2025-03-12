@@ -1,24 +1,24 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import Head from 'next/head'; // Import Head for including manifest
+import Head from 'next/head';
 import { ToastContainer } from 'react-toastify';
 import Header from '../components/Header/Header';
 import Grid from '../components/Grid/Grid';
+import SettingsDialog from '../components/SettingsDialog/SettingsDialog';
 import styles from './page.module.scss';
 
 export default function HomePage() {
   const [playerCount, setPlayerCount] = useState(3);
   const gridRef = useRef();
   const [midSevensCount, setMidSevensCount] = useState(1);
-  const handleMidSevensChange = (count) => setMidSevensCount(count);
 
-  const incrementPlayers = () => {
-    setPlayerCount((prev) => Math.min(prev + 1, 7));
+  const handlePlayerCountChange = (count) => {
+    setPlayerCount(count);
   };
 
-  const decrementPlayers = () => {
-    setPlayerCount((prev) => Math.max(prev - 1, 2));
+  const handleMidSevensChange = (count) => {
+    setMidSevensCount(count);
   };
 
   const resetScores = () => {
@@ -44,13 +44,18 @@ export default function HomePage() {
             draggable
           />
 
-          <Header
-            playerCount={playerCount}
-            onIncrement={incrementPlayers}
-            onDecrement={decrementPlayers}
-            onReset={resetScores}
-            onMidSevensChange={handleMidSevensChange}
-          />
+          <div className={styles.headerWithSettings}>
+            <Header playerCount={playerCount} />
+            <div className={styles.settingsWrapper}>
+              <SettingsDialog
+                playerCount={playerCount}
+                midSevensCount={midSevensCount}
+                onPlayerCountChange={handlePlayerCountChange}
+                onMidSevensChange={handleMidSevensChange}
+                onReset={resetScores}
+              />
+            </div>
+          </div>
 
           <Grid
             ref={gridRef}
