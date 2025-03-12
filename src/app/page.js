@@ -10,6 +10,8 @@ import styles from './page.module.scss';
 export default function HomePage() {
   const [playerCount, setPlayerCount] = useState(3);
   const gridRef = useRef();
+  const [midSevensCount, setMidSevensCount] = useState(1);
+  const handleMidSevensChange = (count) => setMidSevensCount(count);
 
   const incrementPlayers = () => {
     setPlayerCount((prev) => Math.min(prev + 1, 7));
@@ -47,9 +49,14 @@ export default function HomePage() {
             onIncrement={incrementPlayers}
             onDecrement={decrementPlayers}
             onReset={resetScores}
+            onMidSevensChange={handleMidSevensChange}
           />
 
-          <Grid ref={gridRef} playerCount={playerCount} />
+          <Grid
+            ref={gridRef}
+            playerCount={playerCount}
+            midSevensCount={midSevensCount}
+          />
         </div>
       </div>
     </>

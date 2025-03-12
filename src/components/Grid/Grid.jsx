@@ -4,11 +4,26 @@ import { useEffect, useState, forwardRef, useImperativeHandle } from 'react';
 import styles from './Grid.module.scss';
 import { toast } from 'react-toastify';
 
-const ROUNDS = [1, 2, 3, 4, 5, 6, 7, 7, 7, 6, 5, 4, 3, 2, 1, 1];
+const generateRounds = (midSevensCount = 1) => {
+  // Start with ascending rounds 1-7
+  const ascending = Array.from({ length: 7 }, (_, i) => i + 1);
 
-const Grid = forwardRef(({ playerCount = 2 }, ref) => {
+  // Generate the middle 7s (this is between the two 7s in the sequence)
+  const midSevens = Array(midSevensCount).fill(7);
+
+  // End with descending rounds 7-1
+  const descending = Array.from({ length: 7 }, (_, i) => 7 - i);
+
+  // The pattern is [1,2,3,4,5,6,7] + [7,7,7...] + [7,6,5,4,3,2,1]
+  // But we need to avoid duplicating the 7 at the boundaries
+  return [...ascending, ...midSevens.slice(0, midSevensCount), ...descending];
+};
+
+const Grid = forwardRef(({ playerCount = 2, midSevensCount = 1 }, ref) => {
+  const [rounds, setRounds] = useState(() => generateRounds(midSevensCount));
+
   const [scores, setScores] = useState(() => {
-    return ROUNDS.map(() =>
+    return rounds.map(() =>
       Array(playerCount).fill({ select1: '-', select2: '-' })
     );
   });
@@ -20,8 +35,10 @@ const Grid = forwardRef(({ playerCount = 2 }, ref) => {
   const [editingPlayer, setEditingPlayer] = useState(null);
 
   useEffect(() => {
+    const updatedRounds = generateRounds(midSevensCount);
+    setRounds(updatedRounds);
     setScores(() => {
-      return ROUNDS.map(() =>
+      return updatedRounds.map(() =>
         Array.from({ length: playerCount }, () => ({
           select1: '-',
           select2: '-',
@@ -32,12 +49,12 @@ const Grid = forwardRef(({ playerCount = 2 }, ref) => {
     setPlayerNames(() =>
       Array.from({ length: playerCount }, (_, i) => `Player ${i + 1}`)
     );
-  }, [playerCount]);
+  }, [midSevensCount, playerCount]);
 
   useImperativeHandle(ref, () => ({
     resetScores: () => {
       setScores(() => {
-        return ROUNDS.map(() =>
+        return rounds.map(() =>
           Array.from({ length: playerCount }, () => ({
             select1: '-',
             select2: '-',
@@ -54,7 +71,7 @@ const Grid = forwardRef(({ playerCount = 2 }, ref) => {
   };
 
   const getCurrentDealer = () => {
-    for (let i = 0; i < ROUNDS.length; i++) {
+    for (let i = 0; i < rounds.length; i++) {
       if (!isRoundCompleted(i)) {
         return i % playerCount;
       }
@@ -169,7 +186,7 @@ const Grid = forwardRef(({ playerCount = 2 }, ref) => {
       return acc + (score.select1 === '-' ? 0 : parseInt(score.select1, 10));
     }, 0);
 
-    return sum + parseInt(value, 10) !== ROUNDS[roundIndex];
+    return sum + parseInt(value, 10) !== rounds[roundIndex];
   };
 
   const calculateTotal = (playerIndex) => {
@@ -195,7 +212,7 @@ const Grid = forwardRef(({ playerCount = 2 }, ref) => {
 
     const options = [
       '-',
-      ...Array.from({ length: ROUNDS[roundIndex] + 1 }, (_, i) => i),
+      ...Array.from({ length: rounds[roundIndex] + 1 }, (_, i) => i),
     ];
     return (
       <select
@@ -234,7 +251,7 @@ const Grid = forwardRef(({ playerCount = 2 }, ref) => {
           ))}
         </div>
 
-        {ROUNDS.map((roundNum, roundIndex) => (
+        {rounds.map((roundNum, roundIndex) => (
           <div key={roundIndex} className={styles.row}>
             <div className={styles.roundNumberCell}>{roundNum}</div>
             {Array.from({ length: playerCount }).map((_, playerIndex) => (
