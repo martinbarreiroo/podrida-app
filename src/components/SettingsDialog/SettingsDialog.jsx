@@ -143,7 +143,7 @@ function SettingsDialog({
               </div>
             </div>
             <div className={styles.totalRounds}>
-              Total rounds: {14 + localMidSevens}
+              Total rounds: {15 + localMidSevens}
             </div>
           </div>
 
