@@ -139,7 +139,7 @@ function SettingsDialog({
               </div>
               <div className={styles.roundPhase}>
                 <span className={styles.phaseTitle}>Descending</span>
-                <span className={styles.roundList}>7, 6, 5, 4, 3, 2, 1</span>
+                <span className={styles.roundList}>7, 6, 5, 4, 3, 2, 1, 1</span>
               </div>
             </div>
             <div className={styles.totalRounds}>
