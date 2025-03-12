@@ -94,7 +94,7 @@ function SettingsDialog({
           </div>
 
           <div className={styles.settingGroup}>
-            <label htmlFor="midSevens">Middle 7s Rounds:</label>
+            <label htmlFor="midSevens">Non-Triumph-Card Rounds:</label>
             <div className={styles.inputControl}>
               <button
                 onClick={decrementMidSevens}
