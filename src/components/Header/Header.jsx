@@ -1,10 +1,7 @@
-'use client';
-
 import styles from './Header.module.scss';
-import ResetButton from '@/components/ResetButton/ResetButton';
 import Image from 'next/image';
 
-function Header({ playerCount, onIncrement, onDecrement, onReset }) {
+function Header() {
   return (
     <div className={styles.header}>
       <div className={styles.titleContainer}>
@@ -25,12 +22,6 @@ function Header({ playerCount, onIncrement, onDecrement, onReset }) {
           unoptimized={true}
           priority
         />
-      </div>
-      <div className={styles.controls}>
-        <span className={styles.span}>Number of Players: {playerCount}</span>
-        <button onClick={onDecrement}>-</button>
-        <button onClick={onIncrement}>+</button>
-        <ResetButton onReset={onReset} />
       </div>
     </div>
   );

@@ -26,30 +26,4 @@
       }
     }
   }
-
-  .controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-
-    span {
-      padding-top: 10px;
-      color: #fff;
-      text-align: center;
-      font-size: 18px;
-      font-style: oblique;
-      font-weight: 400;
-    }
-
-    button {
-      padding: 10px 20px;
-      background-color: #444;
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-      border-radius: 5px;
-    }
-  }
 }
