@@ -6,7 +6,7 @@ function Header() {
     <div className={styles.header}>
       <div className={styles.titleContainer}>
         <Image
-          src="/assets/podrida.gif"
+          src="/assets/podri2.gif"
           alt="Podrida"
           width={75}
           height={75}
@@ -15,7 +15,7 @@ function Header() {
         />
         <h1>Podrida</h1>
         <Image
-          src="/assets/podrida.gif"
+          src="/assets/podri2.gif"
           alt="Podrida"
           width={75}
           height={75}
