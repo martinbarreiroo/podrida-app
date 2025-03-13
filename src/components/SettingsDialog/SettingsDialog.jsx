@@ -8,17 +8,21 @@ import styles from './SettingsDialog.module.scss';
 function SettingsDialog({
   playerCount,
   midSevensCount,
+  points,
   onPlayerCountChange,
   onMidSevensChange,
+  onPointsChange,
   onReset,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [localPlayerCount, setLocalPlayerCount] = useState(playerCount);
   const [localMidSevens, setLocalMidSevens] = useState(midSevensCount);
+  const [localPoints, setLocalPoints] = useState(points);
 
   const handleOpen = () => {
     setLocalPlayerCount(playerCount);
     setLocalMidSevens(midSevensCount);
+
     setIsOpen(true);
   };
 
@@ -29,6 +33,7 @@ function SettingsDialog({
   const handleSave = () => {
     onPlayerCountChange(localPlayerCount);
     onMidSevensChange(localMidSevens);
+    onPointsChange(localPoints);
     setIsOpen(false);
   };
 
@@ -45,6 +50,9 @@ function SettingsDialog({
   const incrementMidSevens = () => setLocalMidSevens((prev) => prev + 1);
   const decrementMidSevens = () =>
     setLocalMidSevens((prev) => Math.max(prev - 1, 1));
+
+  const incrementPoints = () => setLocalPoints((prev) => prev + 1);
+  const decrementPoints = () => setLocalPoints((prev) => prev - 1);
 
   return (
     <>
@@ -117,6 +125,37 @@ function SettingsDialog({
               />
               <button
                 onClick={incrementMidSevens}
+                className={styles.controlButton}
+              >
+                +
+              </button>
+            </div>
+          </div>
+
+          <div className={styles.settingGroup}>
+            <label htmlFor="pointsAwarded">Points Awarded per winning:</label>
+            <div className={styles.inputControl}>
+              <button
+                onClick={decrementPoints}
+                className={styles.controlButton}
+                disabled={localPoints <= 1}
+              >
+                -
+              </button>
+              <input
+                type="number"
+                id="points"
+                value={localPoints}
+                onChange={(e) =>
+                  setLocalPoints(
+                    Math.max(2, Math.min(7, parseInt(e.target.value, 10) || 2))
+                  )
+                }
+                min="1"
+                className={styles.numberInput}
+              />
+              <button
+                onClick={incrementPoints}
                 className={styles.controlButton}
               >
                 +

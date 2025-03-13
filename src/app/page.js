@@ -12,6 +12,7 @@ export default function HomePage() {
   const [playerCount, setPlayerCount] = useState(3);
   const gridRef = useRef();
   const [midSevensCount, setMidSevensCount] = useState(1);
+  const [points, setPoints] = useState(2);
 
   const handlePlayerCountChange = (count) => {
     setPlayerCount(count);
@@ -19,6 +20,10 @@ export default function HomePage() {
 
   const handleMidSevensChange = (count) => {
     setMidSevensCount(count);
+  };
+
+  const handlePointsChange = (count) => {
+    setPoints(count);
   };
 
   const resetScores = () => {
@@ -37,7 +42,7 @@ export default function HomePage() {
         <div className={styles.page}>
           <ToastContainer
             position="top-right"
-            autoClose={5000}
+            autoClose={3000}
             hideProgressBar={false}
             closeOnClick
             pauseOnHover
@@ -50,8 +55,10 @@ export default function HomePage() {
               <SettingsDialog
                 playerCount={playerCount}
                 midSevensCount={midSevensCount}
+                points={points}
                 onPlayerCountChange={handlePlayerCountChange}
                 onMidSevensChange={handleMidSevensChange}
+                onPointsChange={handlePointsChange}
                 onReset={resetScores}
               />
             </div>
@@ -61,6 +68,7 @@ export default function HomePage() {
             ref={gridRef}
             playerCount={playerCount}
             midSevensCount={midSevensCount}
+            pointsAwarded={points}
           />
         </div>
       </div>
