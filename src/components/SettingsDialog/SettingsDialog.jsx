@@ -133,7 +133,9 @@ function SettingsDialog({
           </div>
 
           <div className={styles.settingGroup}>
-            <label htmlFor="pointsAwarded">Points Awarded per winning:</label>
+            <label htmlFor="pointsAwarded">
+              Points Awarded per sub-round won:
+            </label>
             <div className={styles.inputControl}>
               <button
                 onClick={decrementPoints}
