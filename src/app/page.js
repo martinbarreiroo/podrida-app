@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import Header from '../components/Header/Header';
 import Grid from '../components/Grid/Grid';
 import SettingsDialog from '../components/SettingsDialog/SettingsDialog';
+import RulesDialog from '../components/RulesDialog/RulesDialog';
 import styles from './page.module.scss';
 
 export default function HomePage() {
@@ -61,6 +62,8 @@ export default function HomePage() {
                 onPointsChange={handlePointsChange}
                 onReset={resetScores}
               />
+
+              <RulesDialog />
             </div>
           </div>
 
