@@ -87,6 +87,7 @@ function SettingsDialog({
                     Math.max(2, Math.min(7, parseInt(e.target.value, 10) || 2))
                   )
                 }
+                disabled
                 min="2"
                 max="7"
                 className={styles.numberInput}
@@ -120,6 +121,7 @@ function SettingsDialog({
                     Math.max(1, parseInt(e.target.value, 10) || 1)
                   )
                 }
+                disabled
                 min="1"
                 className={styles.numberInput}
               />
@@ -150,15 +152,18 @@ function SettingsDialog({
                 value={localPoints}
                 onChange={(e) =>
                   setLocalPoints(
-                    Math.max(2, Math.min(7, parseInt(e.target.value, 10) || 2))
+                    Math.max(1, Math.min(3, parseInt(e.target.value, 10) || 1))
                   )
                 }
+                disabled
                 min="1"
+                max="3"
                 className={styles.numberInput}
               />
               <button
                 onClick={incrementPoints}
                 className={styles.controlButton}
+                disabled={localPoints >= 3}
               >
                 +
               </button>
