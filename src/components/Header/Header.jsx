@@ -1,6 +1,7 @@
 import AuthButton from './../AuthButton/AuthButton';
 import styles from './Header.module.scss';
 import Image from 'next/image';
+import MatchHistoryButton from '@/components/MatchHistoryButton/MatchHistoryButton';
 
 function Header() {
   return (
@@ -26,6 +27,7 @@ function Header() {
       </div>
       <div className={styles.authButton}>
         <AuthButton />
+        <MatchHistoryButton />
       </div>
     </div>
   );

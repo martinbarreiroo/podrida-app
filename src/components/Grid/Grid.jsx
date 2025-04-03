@@ -3,6 +3,8 @@
 import { useEffect, useState, forwardRef, useImperativeHandle } from 'react';
 import styles from './Grid.module.scss';
 import { toast } from 'react-toastify';
+import { useAuth0 } from '@auth0/auth0-react';
+import { gameService } from '@/service/gameService';
 
 const generateRounds = (midSevensCount = 1) => {
   // Start with ascending rounds 1-7
@@ -35,6 +37,43 @@ const Grid = forwardRef(
     );
 
     const [editingPlayer, setEditingPlayer] = useState(null);
+    const [gameSubmitted, setGameSubmitted] = useState(false);
+    const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+
+    // Check if game is complete
+    useEffect(() => {
+      const isGameComplete = scores.every((round) =>
+        round.every((score) => score.select1 !== '-' && score.select2 !== '-')
+      );
+
+      if (isGameComplete && !gameSubmitted && isAuthenticated) {
+        submitGameResults();
+      }
+    }, [scores, gameSubmitted, isAuthenticated]);
+
+    const submitGameResults = async () => {
+      try {
+        // Calculate final scores for all players
+        const playerScores = {};
+        playerNames.forEach((name, index) => {
+          playerScores[name] = calculateTotal(index);
+        });
+
+        const gameData = {
+          name: `Game ${new Date().toLocaleString()}`,
+          playerScores: playerScores,
+        };
+
+        const token = await getAccessTokenSilently();
+        await gameService.submitGame(gameData, token);
+
+        setGameSubmitted(true);
+        toast.success('Game has concluded and results saved!');
+      } catch (error) {
+        console.error('Error submitting game results:', error);
+        toast.error('Failed to save game results');
+      }
+    };
 
     useEffect(() => {
       const updatedRounds = generateRounds(midSevensCount);
@@ -53,6 +92,7 @@ const Grid = forwardRef(
       );
     }, [midSevensCount, playerCount]);
 
+    // Modify useImperativeHandle to include game submission reset
     useImperativeHandle(ref, () => ({
       resetScores: () => {
         setScores(() => {
@@ -63,7 +103,9 @@ const Grid = forwardRef(
             }))
           );
         });
+        setGameSubmitted(false);
       },
+      submitGame: submitGameResults,
     }));
 
     const isRoundCompleted = (roundIndex) => {
