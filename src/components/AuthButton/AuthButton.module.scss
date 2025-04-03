@@ -1,0 +1,23 @@
+.authButton {
+  display: flex;
+  align-items: center;
+
+  .userInfo {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  a {
+    padding: 4px 8px;
+    border-radius: 4px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+
+    &:hover {
+      background-color: #555;
+    }
+  }
+}

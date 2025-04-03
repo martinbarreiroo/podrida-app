@@ -1,3 +1,4 @@
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 import './globals.scss';
 import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration/ServiceWorkerRegistration';
 
@@ -23,14 +24,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="manifest" href="/manifest.json" />
-        <title>Podrida</title>
-      </head>
-      <body>
-        <ServiceWorkerRegistration />
-        {children}
-      </body>
+      <UserProvider>
+        <body>
+          <ServiceWorkerRegistration />
+          {children}
+        </body>
+      </UserProvider>
     </html>
   );
 }

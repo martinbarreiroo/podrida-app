@@ -1,3 +1,4 @@
+import AuthButton from './../AuthButton/AuthButton';
 import styles from './Header.module.scss';
 import Image from 'next/image';
 
@@ -22,6 +23,9 @@ function Header() {
           unoptimized={true}
           priority
         />
+      </div>
+      <div className={styles.authButton}>
+        <AuthButton />
       </div>
     </div>
   );
