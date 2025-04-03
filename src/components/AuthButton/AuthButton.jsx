@@ -1,23 +1,72 @@
 'use client';
-import { useUser } from '@auth0/nextjs-auth0/client';
-import Link from 'next/link';
+
+import { useAuth0 } from '@auth0/auth0-react';
+import { useEffect, useState } from 'react';
+import { userService } from '@/service/userService';
 import styles from './AuthButton.module.scss';
+import { FaUser } from 'react-icons/fa'; // Import the user icon
 
-export default function AuthButton() {
-  const { user, isLoading } = useUser();
+function AuthButton() {
+  const {
+    user,
+    isAuthenticated,
+    isLoading,
+    loginWithRedirect,
+    logout,
+    getAccessTokenSilently,
+  } = useAuth0();
+  const [backendUser, setBackendUser] = useState(null);
 
-  if (isLoading) return <div>Loading...</div>;
+  useEffect(() => {
+    if (isAuthenticated && !isLoading) {
+      getAccessTokenSilently()
+        .then((token) => {
+          console.log(
+            'Access token retrieved:',
+            token ? 'Token found' : 'No token'
+          );
+          if (token) {
+            return userService(token);
+          }
+        })
+        .then((userData) => {
+          if (userData) {
+            console.log('Backend user data:', userData);
+            setBackendUser(userData);
+          }
+        })
+        .catch((error) => console.error('Auth error:', error));
+    }
+  }, [isAuthenticated, isLoading, getAccessTokenSilently]);
+
+  if (isLoading) return <div className={styles.authButton}>Loading...</div>;
 
   return (
     <div className={styles.authButton}>
-      {user ? (
+      {isAuthenticated ? (
         <div className={styles.userInfo}>
-          <span>{user.name}</span>
-          <Link href="/api/auth/logout">Logout</Link>
+          <span>{user?.name}</span>
+          <button
+            onClick={() =>
+              logout({ logoutParams: { returnTo: window.location.origin } })
+            }
+            className={styles.logoutButton}
+          >
+            <FaUser />
+            Logout
+          </button>
         </div>
       ) : (
-        <Link href="/api/auth/login">Login</Link>
+        <button
+          onClick={() => loginWithRedirect()}
+          className={styles.loginButton}
+        >
+          <FaUser />
+          Login
+        </button>
       )}
     </div>
   );
 }
+
+export default AuthButton;

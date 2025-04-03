@@ -1,6 +1,6 @@
-import { UserProvider } from '@auth0/nextjs-auth0/client';
 import './globals.scss';
 import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration/ServiceWorkerRegistration';
+import Auth0ClientProvider from '@/components/Auth0ClientProvider/Auth0ClientProvider';
 
 export const viewport = {
   width: 'device-width',
@@ -24,12 +24,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <UserProvider>
-        <body>
-          <ServiceWorkerRegistration />
-          {children}
-        </body>
-      </UserProvider>
+      <body>
+        <ServiceWorkerRegistration />
+        <Auth0ClientProvider>{children}</Auth0ClientProvider>
+      </body>
     </html>
   );
 }

@@ -1,10 +1,16 @@
-export const fetchWithAuth = async (url, options = {}) => {
+// src/service/fetchWithAuth.js
+export const fetchWithAuth = async (url, accessToken, options = {}) => {
+  if (!accessToken) {
+    throw new Error('Not authenticated');
+  }
+
   const res = await fetch(url, {
     ...options,
     credentials: 'include',
     headers: {
       ...options.headers,
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
     },
   });
 
