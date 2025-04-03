@@ -1,24 +1,27 @@
 .gridWrapper {
   width: 100%;
   display: flex;
-  justify-content: center; /* Center the grid initially */
+  justify-content: center;
   align-items: flex-start;
-  overflow-x: auto; /* Enable horizontal scrolling */
-  overflow-y: hidden; /* Disable vertical scrolling for the grid */
+  overflow-x: auto;
+  overflow-y: hidden;
   padding: 1rem;
   scrollbar-width: thin;
 
-  /* Add these properties to ensure proper scrolling when it grows too wide */
-  @media (max-width: 768px) {
-    justify-content: flex-start; /* Switch to left alignment on smaller screens */
+  /* Modify the media query to be more specific for actual mobile devices */
+  @media (max-width: 850px) and (orientation: landscape) {
+    justify-content: center; /* Keep centered in landscape specifically */
   }
 
-  /* When content is wider than container, align to start for better scrolling */
+  @media (max-width: 768px) and (orientation: portrait) {
+    justify-content: flex-start; /* Left alignment on small portrait screens */
+  }
+
+  /* For browsers that support :has(), this will still work for dynamic content */
   &:has(.gridContainer[style*='width']:not([style*='width:100%'])) {
     justify-content: flex-start;
   }
 }
-
 .gridContainer {
   display: flex;
   flex-direction: column;
