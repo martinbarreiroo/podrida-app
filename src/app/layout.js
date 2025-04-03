@@ -4,6 +4,8 @@ import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration/Se
 export const viewport = {
   width: 'device-width',
   initialScale: 1.0,
+  maximumScale: 1.0,
+  userScalable: 'no',
   themeColor: '#333',
 };
 
@@ -23,6 +25,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="manifest" href="/manifest.json" />
+        <title>Podrida</title>
       </head>
       <body>
         <ServiceWorkerRegistration />
